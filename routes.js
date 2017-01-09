@@ -1,10 +1,15 @@
 'use strict';
 
-var Users = require('/models/user')
-
-
 module.exports = function (app, passport){
+  app.get('/', function (req, res) {
+    console.log(req.user)
+    res.send("Home Page")
 
+  })
+
+  app.get('/login', function (req, res) {
+    res.send("Login Page")
+  })
   app.get('/auth/twitter', passport.authenticate('twitter'))
 
   app.get('/auth/twitter/callback',
