@@ -17,6 +17,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use('/controllers', express.static(process.cwd() + '/app/controllers'))
 routes(app, passport)
 
 app.listen('8080')

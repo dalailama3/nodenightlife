@@ -2,8 +2,7 @@
 
 module.exports = function (app, passport){
   app.get('/', function (req, res) {
-    console.log(req.user)
-    res.send("Home Page")
+    res.sendFile(process.cwd() + '/public/html/index.html')
 
   })
 
