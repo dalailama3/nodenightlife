@@ -15,13 +15,16 @@ angular
       'locale': ''
     }
 
+    $scope.venues = []
 
-    var Search = $resource('/searchYelp');
+
+
 
     $scope.searchYelp = function () {
-
+      var location = this.location.locale
+      var Search = $resource('/searchYelp', { 'location': location });
       Search.get(function (results) {
-        console.log("got results")
+        $scope.venues = results.businesses;
       })
     }
 

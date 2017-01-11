@@ -18,9 +18,10 @@
   module.exports = function SearchHandler () {
 
     this.searchYelp = function (req, res) {
-      yelp.search({ term: 'food', location: 'Montreal' })
+      console.log(req.query.location)
+      yelp.search({ term: 'bars', location: req.query.location })
       .then(function (data) {
-        console.log(data);
+
         res.json(data)
 
       })
