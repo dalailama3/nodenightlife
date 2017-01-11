@@ -6,4 +6,5 @@ module.exports = {
     'consumerSecret': process.env.TWITTER_SECRET,
     'callbackURL': process.env.APP_URL + 'auth/twitter/callback'
   }
+
 }

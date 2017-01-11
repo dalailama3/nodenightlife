@@ -5,6 +5,7 @@ var session = require('express-session')
 var mongoose = require('mongoose')
 var app = express()
 require('dotenv').load();
+
 require('./app/config/passport')(passport);
 
 mongoose.connect(process.env.MONGO_URI)
@@ -16,6 +17,9 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+var bodyParser = require('body-parser')
+app.use( bodyParser.json() );
 
 app.use('/controllers', express.static(process.cwd() + '/app/controllers'))
 routes(app, passport)

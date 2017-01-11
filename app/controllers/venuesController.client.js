@@ -3,16 +3,28 @@
 (function () {
 
 
+
 angular
-  .module("nightlifeApp", [])
-  .controller('venuesController', ['$scope', function ($scope) {
+  .module("nightlifeApp", ['ngResource'])
+  .controller('venuesController',
+      ['$scope', '$resource', function ($scope, $resource) {
+
+
+
     $scope.location = {
       'locale': ''
     }
 
-    $scope.logInput = function () {
-    
+
+    var Search = $resource('/searchYelp');
+
+    $scope.searchYelp = function () {
+
+      Search.get(function (results) {
+        console.log("got results")
+      })
     }
+
 
 
 

@@ -1,6 +1,9 @@
 'use strict';
-
-module.exports = function (app, passport){
+var path = process.cwd()
+console.log(path)
+var SearchHandler = require(path + '/app/controllers/venuesController.server.js')
+var searchHandler = new SearchHandler();
+module.exports = function (app, passport) {
   app.get('/', function (req, res) {
     res.sendFile(process.cwd() + '/public/html/index.html')
 
@@ -9,6 +12,9 @@ module.exports = function (app, passport){
   app.get('/login', function (req, res) {
     res.send("Login Page")
   })
+
+  app.get('/searchYelp', searchHandler.searchYelp)
+
   app.get('/auth/twitter', passport.authenticate('twitter'))
 
   app.get('/auth/twitter/callback',
