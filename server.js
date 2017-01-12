@@ -22,6 +22,7 @@ var bodyParser = require('body-parser')
 app.use( bodyParser.json() );
 
 app.use('/controllers', express.static(process.cwd() + '/app/controllers'))
+app.use('/public', express.static(process.cwd() + '/public'))
 routes(app, passport)
 
 app.listen('8080')
