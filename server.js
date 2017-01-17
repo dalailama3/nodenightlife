@@ -4,6 +4,7 @@ var passport = require('passport')
 var session = require('express-session')
 var mongoose = require('mongoose')
 var app = express()
+var path = require('path')
 require('dotenv').load();
 
 require('./app/config/passport')(passport);
@@ -15,8 +16,12 @@ app.use(session({
     saveUninitialized: true
 }));
 
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'ejs')
 app.use(passport.initialize());
 app.use(passport.session());
+
+
 
 var bodyParser = require('body-parser')
 app.use( bodyParser.json() );

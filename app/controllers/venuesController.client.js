@@ -10,7 +10,6 @@ angular
       ['$scope', '$resource', function ($scope, $resource) {
 
 
-
     $scope.location = {
       'locale': ''
     }

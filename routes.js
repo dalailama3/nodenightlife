@@ -4,8 +4,14 @@ console.log(path)
 var SearchHandler = require(path + '/app/controllers/venuesController.server.js')
 var searchHandler = new SearchHandler();
 module.exports = function (app, passport) {
+
+  app.use(function(req, res, next) {
+    res.locals.user = req.user;
+    next();
+  })
+
   app.get('/', function (req, res) {
-    res.sendFile(process.cwd() + '/public/html/index.html')
+    res.render('index')
 
   })
 
