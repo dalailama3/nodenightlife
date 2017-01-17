@@ -55,8 +55,10 @@ angular
 
       })
 
+    }
 
-
+    $scope.createRSVP = function (venueId) {
+      console.log(venueId)
     }
 
 

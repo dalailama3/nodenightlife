@@ -26,10 +26,10 @@
                   <p class="venue-snippet">{{venue.snippet_text}}</p>
                   <p class="venue-going">{{ rsvps[venue.name + venue.location.city].length + ' going' }}</p>
                   <% if (locals.user) { %>
-                    <a href="#">RSVP</a>
+                    <a ng-click="createRSVP(venue.name + venue.location.city)">RSVP</a>
                   <% } else { %>
-                    <a href="#">Sign in to RSVP</a>
-                  <% } %> 
+                    <a href="/auth/twitter">Sign in to RSVP</a>
+                  <% } %>
                 </div>
               </div>
 
