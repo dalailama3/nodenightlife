@@ -13,6 +13,7 @@ module.exports = function (app, passport) {
     res.send("Login Page")
   })
 
+  app.get('/venue/:id', searchHandler.rsvpsCount)
   app.get('/searchYelp', searchHandler.searchYelp)
 
   app.get('/auth/twitter', passport.authenticate('twitter'))

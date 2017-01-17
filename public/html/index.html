@@ -24,6 +24,7 @@
                 <div class="venue-info">
                   <a class="venue-name" href="{{venue.url}}" target="_blank">{{venue.name}}</a>
                   <p class="venue-snippet">{{venue.snippet_text}}</p>
+                  <p class="venue-going">{{ rsvps[venue.name + venue.location.city].length + ' going' }}</p>
                 </div>
               </div>
 
