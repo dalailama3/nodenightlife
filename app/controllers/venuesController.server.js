@@ -17,7 +17,10 @@
 
   module.exports = function SearchHandler () {
 
+
     this.searchYelp = function (req, res) {
+
+      req.session.lastSearch = req.query.location
       yelp.search({ term: 'bars', location: req.query.location })
       .then(function (data) {
         data.businesses.forEach((business)=> {
@@ -46,11 +49,9 @@
       .exec(function (err, rsvp) {
         if (err) { throw err}
         else if (rsvp) {
-          console.log(rsvp[0])
           res.json(rsvp[0])
         } else {
           console.log("nothing found")
-          res.json({going: 0})
         }
       })
     }

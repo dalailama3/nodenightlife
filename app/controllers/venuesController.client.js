@@ -11,11 +11,17 @@ angular
 
 
     $scope.location = {
-      'locale': ''
+      'locale': null
     }
 
     $scope.venues = []
     $scope.rsvps = {}
+
+    reload()
+
+    function reload() {
+      getLastSearch()
+    }
 
     var lessThan24HoursOld = function (rsvps) {
       var cur_time = new Date()
@@ -60,6 +66,20 @@ angular
       var RSVP = $resource('/venue/:venueId', { venueId: venueId })
       RSVP.save(function (results) {
         $scope.getRSVPCount($scope.venues)
+      })
+    }
+
+    function getLastSearch () {
+      var lastSearch = $resource('/lastSearch')
+      lastSearch.get(function (result) {
+        var obj = JSON.parse(JSON.stringify(result))
+        var arr = []
+        for (var key in obj) {
+            arr.push(obj[key])
+        }
+
+        $scope.location.locale = arr.join('')
+        $scope.searchYelp()
       })
     }
 

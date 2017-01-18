@@ -1,6 +1,5 @@
 'use strict';
 var path = process.cwd()
-console.log(path)
 var SearchHandler = require(path + '/app/controllers/venuesController.server.js')
 var searchHandler = new SearchHandler();
 module.exports = function (app, passport) {
@@ -23,6 +22,15 @@ module.exports = function (app, passport) {
     .get(searchHandler.rsvpsCount)
     .post(searchHandler.createRSVP)
 
+  app.get('/lastSearch', function (req, res) {
+    if (req.session.lastSearch) {
+      console.log("lastSearch is: ", req.session.lastSearch)
+      res.send(req.session.lastSearch)
+    } else {
+      res.sendStatus(404);
+    }
+  })
+
   app.get('/searchYelp', searchHandler.searchYelp)
 
   app.get('/auth/twitter', passport.authenticate('twitter'))
@@ -31,13 +39,11 @@ module.exports = function (app, passport) {
     passport.authenticate('twitter', {
       successRedirect: '/',
       failureRedirect: '/login'
-    }));
-
+    }))
 }
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated())
     return next();
-
   res.redirect('/login')
 }
