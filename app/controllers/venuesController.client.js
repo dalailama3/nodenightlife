@@ -20,9 +20,9 @@ angular
     var lessThan24HoursOld = function (rsvps) {
       var cur_time = new Date()
       var copy_cur_time = new Date()
-      var yesterday = copy_cur_time.setDate(copy_cur_time.getDate() - 1)
+      var yesterday = new Date(copy_cur_time.setDate(copy_cur_time.getDate() - 1))
       var fresh = rsvps.filter((rsvp)=> {
-        return rsvp.created_at >= yesterday && rsvp.created_at < cur_time
+        return new Date(rsvp.created_at) >= yesterday && new Date(rsvp.created_at) < cur_time
       })
       return fresh
 
@@ -30,8 +30,7 @@ angular
 
 
     $scope.getRSVPCount = function(venues) {
-      console.log("called")
-      var arr = [];
+
       venues.forEach((venue)=> {
         var venueId = venue.name + venue.location.city
         var Count = $resource('/venue/:venueId', { venueId: venueId })
@@ -60,7 +59,7 @@ angular
     $scope.createRSVP = function (venueId) {
       var RSVP = $resource('/venue/:venueId', { venueId: venueId })
       RSVP.save(function (results) {
-        console.log(results)
+        $scope.getRSVPCount($scope.venues)
       })
     }
 

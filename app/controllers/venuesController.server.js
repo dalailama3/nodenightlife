@@ -72,7 +72,7 @@
           } else {
             RSVPS.findOneAndUpdate(
               {id: req.params.id},
-              {$push: {'going': { 'user': userId, 'created_at': cur_time} }})
+              {$push: {'going': { 'user': userId, 'created_at': cur_time }}})
               .exec(function (err, result) {
               if (err) { throw err}
               res.json(result)
