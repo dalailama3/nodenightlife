@@ -41,8 +41,6 @@
     }
 
     this.rsvpsCount = function (req, res) {
-      var cur_time = new Date()
-      var yesterday = cur_time.setDate(cur_time.getDate() - 1)
 
       RSVPS.find({'id': req.params.id})
       .exec(function (err, rsvp) {
@@ -56,7 +54,34 @@
         }
       })
     }
+
+
+    this.createRSVP = function (req, res) {
+      var userId = req.user._id
+      var cur_time = new Date()
+      var copy = new Date()
+      var yesterday = copy.setDate(copy.getDate() - 1)
+
+      RSVPS.findOneAndUpdate(
+        {id: req.params.id, 'going.user': req.user._id},
+        {$pull: { 'going': { 'created_at': { $gt: new Date(yesterday), $lt: cur_time }}}})
+        .exec(function (err, result) {
+          if (err) { throw err}
+          else if (result) {
+            res.end()
+          } else {
+            RSVPS.findOneAndUpdate(
+              {id: req.params.id},
+              {$push: {'going': { 'user': userId, 'created_at': cur_time} }})
+              .exec(function (err, result) {
+              if (err) { throw err}
+              res.json(result)
+            })
+          }
+        })
+    }
   }
+
 
 
 

@@ -19,7 +19,10 @@ module.exports = function (app, passport) {
     res.send("Login Page")
   })
 
-  app.get('/venue/:id', searchHandler.rsvpsCount)
+  app.route('/venue/:id')
+    .get(searchHandler.rsvpsCount)
+    .post(searchHandler.createRSVP)
+
   app.get('/searchYelp', searchHandler.searchYelp)
 
   app.get('/auth/twitter', passport.authenticate('twitter'))

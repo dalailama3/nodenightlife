@@ -58,7 +58,10 @@ angular
     }
 
     $scope.createRSVP = function (venueId) {
-      console.log(venueId)
+      var RSVP = $resource('/venue/:venueId', { venueId: venueId })
+      RSVP.save(function (results) {
+        console.log(results)
+      })
     }
 
 
