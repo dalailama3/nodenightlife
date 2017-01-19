@@ -21,7 +21,7 @@
     this.searchYelp = function (req, res) {
 
       req.session.lastSearch = req.query.location
-      yelp.search({ term: 'bars', location: req.query.location })
+      yelp.search({ term: 'bars', location: req.query.location, limit: 30 })
       .then(function (data) {
         data.businesses.forEach((business)=> {
           RSVPS.update(
