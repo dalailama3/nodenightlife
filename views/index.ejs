@@ -2,23 +2,19 @@
 <html ng-app="nightlifeApp">
   <head>
     <title="Night Life App"</title>
+    <script src="https://use.fontawesome.com/82461445fc.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="/public/css/main.css" rel="stylesheet" type="text/css">
   </head>
   <body>
     <div class="container-fluid" ng-controller="venuesController">
-      <h1><%= locals.user %></h1>
 
-      <div class="hero-unit" id="banner">
-        <h1>Heading</h1>
-        <p>Tagline</p>
-          <p>
-            <a class="btn btn-primary btn-large">
-              Learn more
-            </a>
-        </p>
+      <div class="hero-unit">
+        <h1>Night Crawlers</h1>
+        <p>RSVP bars near you, and see how many of your Twitter friends will be there!</p>
+
       </div>
-      <div class="row">
+      <div class="row yelpForm">
         <form ng-submit="searchYelp()" class="col-lg-12 form-group">
           <div class="input-group input-group-lg">
 
@@ -32,8 +28,8 @@
 
       <% if (locals.user) { %>
 
-          <ul class="userRsvps" ng-init='getUserRsvps("<%= locals.user._id %>")'>
-            <li ng-repeat="myRsvp in userRsvps">
+          <ul class="userRsvps list-group" ng-init='getUserRsvps("<%= locals.user._id %>")'>
+            <li class="list-group-item list-group-item-success liRsvp" ng-repeat="myRsvp in userRsvps">
               <span>RSVP'd {{myRsvp.id}} at {{myRsvp.going[0]}}</span>
             </li>
 
@@ -50,12 +46,14 @@
                 <div class="venue-info">
                   <a class="venue-name" href="{{venue.url}}" target="_blank">{{venue.name}}</a>
                   <p class="venue-snippet">{{venue.snippet_text}}</p>
-                  <p class="venue-going">{{ rsvps[venue.name + venue.location.city].length + ' going' }}</p>
+                  <p class="venue-going">{{ rsvps[venue.name + venue.location.city].length + ' going' }} <span class="fa fa-twitter"></span></p>
 
                   <% if (locals.user) { %>
-                    <a ng-click="createRSVP(venue.name + venue.location.city); getUserRsvps('<%= locals.user._id %>')">RSVP</a>
+                    <a class="link" ng-click="createRSVP(venue.name + venue.location.city); getUserRsvps('<%= locals.user._id %>')">Going!</a>
                   <% } else { %>
-                    <a href="/auth/twitter">Sign in to RSVP</a>
+                      <a class="btn btn-block btn-social btn-twitter" href="/auth/twitter">
+                        <span class="fa fa-twitter"></span> Sign in with Twitter
+                    </a>
                   <% } %>
                 </div>
               </div>

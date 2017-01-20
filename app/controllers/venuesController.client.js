@@ -63,7 +63,6 @@ angular
     $scope.getUserRsvps = function (userId) {
       var userRsvps = $resource('/userRsvps/:userId', { userId: userId })
       userRsvps.query(function (results) {
-        console.log(recentUserRsvps(results))
         $scope.userRsvps = recentUserRsvps(results);
 
       })

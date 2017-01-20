@@ -9,8 +9,9 @@ html, body, div, a, p {
 
 body {
   text-align: center;
+  background-image: url("../images/night-life.jpg");
+  background-size: cover;
 }
-
 
 .row-flex {
   display: -webkit-box;
@@ -27,16 +28,56 @@ a {
 }
 
 .userRsvps {
-  border: 2px dotted black;
-  height: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.liRsvp {
+  margin: 3px 20px;
 }
 
 .searchResults {
-  background: lightblue;
 }
 
 .col-sm-6, .col-md-3 {
   margin-left: 15px;
   margin-right: 15px;
   width: calc( 25% - 30px );
+}
+
+.yelpForm {
+  margin: 40px;
+}
+
+.hero-unit {
+  color: white;
+  padding: 40px;
+}
+
+.hero-unit h1 {
+  font-size: 60px;
+  text-shadow: 3px 3px black;
+}
+
+.hero-unit p {
+  font-size: 24px;
+  text-shadow: 2px 2px black;
+
+}
+.venue-going {
+  border: 2px solid green;
+  font-size: 24px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.link {
+  font-size: 24px;
+  text-decoration: none;
+}
+
+
+.thumbnail {
+
 }
