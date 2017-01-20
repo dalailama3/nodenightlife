@@ -16,6 +16,8 @@ angular
 
     $scope.venues = []
     $scope.rsvps = {}
+    $scope.user = null;
+    $scope.userRsvps = []
 
     reload()
 
@@ -34,6 +36,39 @@ angular
 
     }
 
+    var clipOffCity = function(venueId) {
+      var regex = /[a-z][A-Z]/
+      var m = venueId.match(regex)
+      return venueId.slice(0, m.index + 1)
+    }
+
+    var recentUserRsvps = function (arr) {
+      var cur_time = new Date()
+      var copy_cur_time = new Date()
+      var yesterday = new Date(copy_cur_time.setDate(copy_cur_time.getDate() - 1))
+      var result = arr.map((rsvp)=> {
+        var clippedCity = clipOffCity(rsvp.id)
+        return {
+          going: rsvp.going.filter((r)=> {
+            return new Date(r.created_at) >= yesterday && new Date(r.created_at) < cur_time
+            }).map((r)=> { return new Date(r.created_at).toDateString() + " " + new Date(r.created_at).toLocaleTimeString() }),
+
+          id: clippedCity
+
+          }
+      })
+      return result
+    }
+
+    $scope.getUserRsvps = function (userId) {
+      var userRsvps = $resource('/userRsvps/:userId', { userId: userId })
+      userRsvps.query(function (results) {
+        console.log(recentUserRsvps(results))
+        $scope.userRsvps = recentUserRsvps(results);
+
+      })
+
+    }
 
     $scope.getRSVPCount = function(venues) {
 

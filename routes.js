@@ -2,6 +2,7 @@
 var path = process.cwd()
 var SearchHandler = require(path + '/app/controllers/venuesController.server.js')
 var searchHandler = new SearchHandler();
+
 module.exports = function (app, passport) {
 
   app.use(function(req, res, next) {
@@ -31,6 +32,8 @@ module.exports = function (app, passport) {
     }
   })
 
+  app.get('/userRsvps/:userId', searchHandler.getUserRsvps)
+
   app.get('/searchYelp', searchHandler.searchYelp)
 
   app.get('/auth/twitter', passport.authenticate('twitter'))
@@ -38,12 +41,13 @@ module.exports = function (app, passport) {
   app.get('/auth/twitter/callback',
     passport.authenticate('twitter', {
       successRedirect: '/',
-      failureRedirect: '/login'
+      failureRedirect: '/'
     }))
 }
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated())
     return next();
-  res.redirect('/login')
+
+  res.redirect('/')
 }

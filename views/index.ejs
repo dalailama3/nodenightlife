@@ -6,8 +6,9 @@
     <link href="/public/css/main.css" rel="stylesheet" type="text/css">
   </head>
   <body>
-
     <div class="container-fluid" ng-controller="venuesController">
+      <h1><%= locals.user %></h1>
+
       <div class="hero-unit" id="banner">
         <h1>Heading</h1>
         <p>Tagline</p>
@@ -28,8 +29,16 @@
           </form>
         </div>
       </div>
-        <ul class="userRsvps">
-        </ul>
+
+      <% if (locals.user) { %>
+
+          <ul class="userRsvps" ng-init='getUserRsvps("<%= locals.user._id %>")'>
+            <li ng-repeat="myRsvp in userRsvps">
+              <span>RSVP'd {{myRsvp.id}} at {{myRsvp.going[0]}}</span>
+            </li>
+
+          </ul>
+      <% } %>
         <div class="container-fluid searchResults">
           <div class="row row-flex">
 
@@ -44,7 +53,7 @@
                   <p class="venue-going">{{ rsvps[venue.name + venue.location.city].length + ' going' }}</p>
 
                   <% if (locals.user) { %>
-                    <a ng-click="createRSVP(venue.name + venue.location.city)">RSVP</a>
+                    <a ng-click="createRSVP(venue.name + venue.location.city); getUserRsvps('<%= locals.user._id %>')">RSVP</a>
                   <% } else { %>
                     <a href="/auth/twitter">Sign in to RSVP</a>
                   <% } %>

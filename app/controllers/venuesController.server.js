@@ -64,23 +64,43 @@
       var yesterday = copy.setDate(copy.getDate() - 1)
 
       RSVPS.findOneAndUpdate(
-        {id: req.params.id, 'going.user': req.user._id},
+        {id: req.params.id, 'going.user': req.user._id, 'going.created_at': { $gt: new Date(yesterday), $lt: cur_time }},
         {$pull: { 'going': { 'created_at': { $gt: new Date(yesterday), $lt: cur_time }}}})
         .exec(function (err, result) {
           if (err) { throw err}
           else if (result) {
-            res.end()
+            console.log("removed an rsvp: ", result)
+            res.end("removed an rsvp")
           } else {
             RSVPS.findOneAndUpdate(
               {id: req.params.id},
               {$push: {'going': { 'user': userId, 'created_at': cur_time }}})
               .exec(function (err, result) {
               if (err) { throw err}
+              console.log(result)
               res.json(result)
             })
           }
         })
     }
+
+    this.getUserRsvps = function (req, res) {
+      var cur_time = new Date()
+      var copy = new Date()
+      var yesterday = copy.setDate(copy.getDate() - 1)
+
+      var userId = req.params.userId
+      console.log(userId)
+
+      RSVPS.find({"going.user": userId, "going.created_at": {$gt: new Date(yesterday), $lt: cur_time}})
+      .exec(function (err, results) {
+        if (err) { throw err}
+        console.log(results)
+        res.json(results)
+      })
+    }
+
+
   }
 
 
