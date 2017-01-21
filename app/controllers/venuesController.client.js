@@ -87,7 +87,9 @@ angular
 
         })
       })
-      console.log($scope.rsvps)
+      if ($scope.userId) {
+        $scope.getUserRsvps($scope.userId)
+      }
     }
 
 
@@ -106,7 +108,6 @@ angular
       var RSVP = $resource('/venue/:venueId', { venueId: venueId })
       RSVP.save(function (results) {
         $scope.getRSVPCount($scope.venues)
-        $scope.getUserRsvps($scope.userId)
       })
     }
 
