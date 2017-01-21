@@ -3,6 +3,8 @@
   <head>
     <title="Night Life App"</title>
     <script src="https://use.fontawesome.com/82461445fc.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="/public/css/main.css" rel="stylesheet" type="text/css">
   </head>
@@ -27,7 +29,7 @@
       </div>
 
       <% if (locals.user) { %>
-
+          <div ng-init='setUserId("<%= locals.user._id %>")'></div>
           <ul class="userRsvps list-group" ng-init='getUserRsvps("<%= locals.user._id %>")'>
             <li class="list-group-item list-group-item-success liRsvp" ng-repeat="myRsvp in userRsvps">
               <span>RSVP'd {{myRsvp.id}} at {{myRsvp.going[0]}}</span>
@@ -49,7 +51,7 @@
                   <p class="venue-going">{{ rsvps[venue.name + venue.location.city].length + ' going' }} <span class="fa fa-twitter"></span></p>
 
                   <% if (locals.user) { %>
-                    <a class="link" ng-click="createRSVP(venue.name + venue.location.city); getUserRsvps('<%= locals.user._id %>')">Going!</a>
+                    <a class="link" ng-click="createRSVP(venue.name + venue.location.city)">Going!</a>
                   <% } else { %>
                       <a class="btn btn-block btn-social btn-twitter" href="/auth/twitter">
                         <span class="fa fa-twitter"></span> Sign in with Twitter

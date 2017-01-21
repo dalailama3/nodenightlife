@@ -11,6 +11,7 @@ body {
   text-align: center;
   background-image: url("../images/night-life.jpg");
   background-size: cover;
+  font-family: 'Open Sans';
 }
 
 .row-flex {
@@ -56,8 +57,9 @@ a {
 }
 
 .hero-unit h1 {
-  font-size: 60px;
-  text-shadow: 3px 3px black;
+  font-size: 65px;
+  text-shadow: 4px 3px black;
+  margin-top: 25px;
 }
 
 .hero-unit p {
@@ -70,6 +72,11 @@ a {
   font-size: 24px;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.venue-name {
+  font-weight: bold;
+  font-size: 22px;
 }
 
 .link {

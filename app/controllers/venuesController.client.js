@@ -18,11 +18,16 @@ angular
     $scope.rsvps = {}
     $scope.user = null;
     $scope.userRsvps = []
+    $scope.userId = ""
 
     reload()
 
     function reload() {
       getLastSearch()
+    }
+
+    $scope.setUserId = function (id) {
+      $scope.userId = id;
     }
 
     var lessThan24HoursOld = function (rsvps) {
@@ -64,6 +69,7 @@ angular
       var userRsvps = $resource('/userRsvps/:userId', { userId: userId })
       userRsvps.query(function (results) {
         $scope.userRsvps = recentUserRsvps(results);
+        console.log($scope.userRsvps)
 
       })
 
@@ -100,6 +106,7 @@ angular
       var RSVP = $resource('/venue/:venueId', { venueId: venueId })
       RSVP.save(function (results) {
         $scope.getRSVPCount($scope.venues)
+        $scope.getUserRsvps($scope.userId)
       })
     }
 
