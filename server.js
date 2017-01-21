@@ -30,4 +30,4 @@ app.use('/controllers', express.static(process.cwd() + '/app/controllers'))
 app.use('/public', express.static(process.cwd() + '/public'))
 routes(app, passport)
 
-app.listen(process.env.PORT)
+app.listen(process.env.PORT || '8080')

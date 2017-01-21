@@ -11,17 +11,14 @@
   <body>
     <div class="container-fluid" ng-controller="venuesController">
 
-
-        <ul class="nav nav-pills">
+      <ul class="nav nav-pills">
             <% if (locals.user) { %>
-          <li><a href="/logout">Logout</a></li>
+              <li><a class="navLi" href="/logout">Logout</a></li>
 
-        <% } else { %>
-
-
-          <li><a href="/login">Log In</a></li>
+            <% } else { %>
+              <li><a class="navLi" href="/login">Log In</a></li>
         <% } %>
-        </ul>
+      </ul>
 
 
       <div class="hero-unit">
@@ -82,4 +79,3 @@
    <script type="text/javascript" src="/controllers/venuesController.client.js"></script>
 
 </html>
-<!-- /Users/johnclark/FreeCodeCamp/nightlifeapp/public/html/index.html -->
