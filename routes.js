@@ -16,7 +16,13 @@ module.exports = function (app, passport) {
   })
 
   app.get('/login', function (req, res) {
-    res.send("Login Page")
+    res.redirect('/auth/twitter')
+  })
+
+  app.get('/logout', function (req, res) {
+    req.logout();
+    req.session.destroy();
+    res.redirect("/");
   })
 
   app.route('/venue/:id')

@@ -11,6 +11,19 @@
   <body>
     <div class="container-fluid" ng-controller="venuesController">
 
+
+        <ul class="nav nav-pills">
+            <% if (locals.user) { %>
+          <li><a href="/logout">Logout</a></li>
+
+        <% } else { %>
+
+
+          <li><a href="/login">Log In</a></li>
+        <% } %>
+        </ul>
+
+
       <div class="hero-unit">
         <h1>Night Crawlers</h1>
         <p>RSVP bars near you, and see how many of your Twitter friends will be there!</p>
